@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finalizar Compra</title>
+  <link rel="stylesheet" href="Carrinho.css">
+</head>
+<body>
+  <div class="cart-container">
+    <h1>Finalizar Compra</h1>
+    
+    <div id="purchase-details"></div>
+    
+    <form id="address-form">
+      <h2>Informações para entrega</h2>
+      
+      <label for="nome_cliente">Nome:</label>
+      <input type="text" id="nome_cliente" placeholder="Digite seu nome" required>
+      
+      <label for="email_cliente">E-mail:</label>
+      <input type="email" id="email_cliente" placeholder="Digite seu e-mail" required>
+      
+      <label for="cep">CEP:</label>
+      <input type="text" id="cep" placeholder="Digite o CEP" required>
+      
+      <button type="button" onclick="calculateFrete()">Calcular Frete</button>
+      <p id="frete-result"></p>
+
+      <button type="button" onclick="processarCompra()">Confirmar Compra</button>
+    </form>
+  </div>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function displayCartDetails() {
+      const purchaseDetails = document.getElementById("purchase-details");
+      let total = 0;
+
+      purchaseDetails.innerHTML = cart.map(item => {
+        total += item.quantity * item.new_price;
+        return `
+          <div>
+            <p>${item.name} - ${item.quantity}x R$${item.new_price.toFixed(2)}</p>
+          </div>
+        `;
+      }).join("");
+
+      purchaseDetails.innerHTML += `<p><strong>Total: R$${total.toFixed(2)}</strong></p>`;
+    }
+
+    function calculateFrete() {
+      const cep = document.getElementById("cep").value;
+      if (!cep) {
+        alert("Por favor, digite o CEP.");
+        return;
+      }
+
+      fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.erro) {
+            document.getElementById("frete-result").textContent = "CEP inválido.";
+          } else {
+            document.getElementById("frete-result").textContent =
+              `Frete para ${data.localidade} - ${data.uf}: R$20.00 (valor estimado).`;
+          }
+        })
+        .catch(error => {
+          console.error("Erro ao buscar o CEP:", error);
+          document.getElementById("frete-result").textContent = "Erro ao calcular o frete.";
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", displayCartDetails);
+
+function processarCompra() {
+  const nomeCliente = document.getElementById("nome_cliente").value;
+  const cep = document.getElementById("cep").value;
+  const totalPrice = cart.reduce((total, produto) => total + produto.quantity * produto.new_price, 0);
+
+  if (!nomeCliente || !cep) {
+    alert("Por favor, preencha todas as informações.");
+    return;
+  }
+
+  if (cart.length === 0) {
+    alert("O carrinho está vazio. Adicione itens antes de finalizar a compra.");
+    return;
+  }
+
+  fetch('processar_compra.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: new URLSearchParams({
+      'cart': JSON.stringify(cart),  
+      'nome_cliente': nomeCliente,
+      'cep': cep,
+      'total_price': totalPrice
+    })
+  })
+  .then(response => response.text())
+  .then(data => {
+    alert(data); 
+
+    localStorage.removeItem("cart");
+    window.location.href = "./home.html"; 
+  })
+  .catch(error => {
+    console.error('Erro:', error);
+    alert("Houve um erro ao processar sua compra.");
+  });
+}
+  </script>
+</body>
+</html>

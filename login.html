@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="login.css">
+    <title>Register e Login</title>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <!-- Formulário de Registro -->
+        <div class="form-container registrar-se">
+            <form action="register.php" method="POST">
+                <h1>Crie sua conta</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            
+                <span>Ou use seu email para registrar</span>
+                <input type="text" name="username" placeholder="Nome de usuário" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Senha" required>
+                <input type="password" name="confirm_password" placeholder="Confirmar senha" required>
+                <button type="submit">Inscrever-se</button>
+            </form>
+            
+        </div>
+
+        <!-- Formulário de Login -->
+        <div class="form-container entrar">
+            <form action="login.php" method="POST">
+                <h1>Entrar</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            
+                <span>Ou use sua senha de e-mail</span>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Senha" required>
+                <a href="#">Esqueceu sua senha?</a>
+                <button type="submit">Entrar</button>
+            </form>
+            
+        </div>
+
+        <!-- Contêiner de alternância -->
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-esquerda">
+                    <h1>Bem-vindo Novamente</h1>
+                    <p>Insira seus dados pessoais para usar todos os recursos do site</p>
+                    <button class="hidden" id="login">Entrar</button>
+                </div>
+                <div class="toggle-panel toggle-direito">
+                    <h1>Olá, tudo bem?</h1>
+                    <p>Registre seus dados pessoais para usar todos os recursos do site</p>
+                    <button class="hidden" id="register">Registrar-se</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+/* Estilo para o container principal do carrinho */
+.cart-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Título do carrinho */
+  .cart-container h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Lista de itens */
+  .cart-container ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .cart-container li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .cart-container li:last-child {
+    border-bottom: none;
+  }
+  
+  /* Estilo para as imagens dos produtos */
+  .cart-container img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 20px;
+  }
+  
+  /* Botões de ação */
+  .cart-container button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 5px;
+  }
+  
+  .cart-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Total e esvaziar carrinho */
+  .cart-container p {
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  
+  .cart-container .clear-cart {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+  }
+  
+  .cart-container .clear-cart:hover {
+    background-color: #e60000;
+  }
+
+  .cart-container .buy-cart {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.cart-container .buy-cart:hover {
+    background-color: #218838;
+}
